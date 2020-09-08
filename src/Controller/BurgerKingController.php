@@ -32,7 +32,7 @@ class BurgerKingController extends AbstractController
 
         foreach ($items as $item) {
             $image = str_replace('..', 'https://burgerking.ru', $item);
-            $path = '/public/assets/images/BurgerKing/' . basename($image);
+            $path = '../public/assets/images/BurgerKing/' . basename($image);
             $file = file_get_contents($image);
             $insert = file_put_contents($path, $file);
             if (!$insert) {
