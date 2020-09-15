@@ -11,6 +11,9 @@
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
+local-access_log
+local-error_log
+.idea/
 .phpunit
 .phpunit.result.cache
 /phpunit.xml
