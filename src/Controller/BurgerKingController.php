@@ -23,17 +23,16 @@ class BurgerKingController extends AbstractController
      * @throws \Exception
      */
     public function index(){
-        $html = file_get_contents("https://burgerking.ru/bigboard/coupons");
+        $html = file_get_contents("https://app.burgerking.ru/coupon");
         $crawler = new Crawler($html);
 
-        $items = $crawler->filterXPath("//img[@class='coupon-img mt20']")->each(function (Crawler $node) {
+        $items = $crawler->filterXPath("//div[@class='coupon__image']")->children('img')->each(function (Crawler $node) {
              return $node->attr('src');
         });
 
         foreach ($items as $item) {
-            $image = str_replace('..', 'https://burgerking.ru', $item);
-            $path = '../public/assets/images/BurgerKing/' . basename($image);
-            $file = file_get_contents($image);
+            $path = '../public/assets/images/BurgerKing/' . basename($item);
+            $file = file_get_contents($item);
             $insert = file_put_contents($path, $file);
             if (!$insert) {
                 throw new \Exception('Failed to write image');
